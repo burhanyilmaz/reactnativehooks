@@ -1339,7 +1339,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   _reactNative.AppRegistry.registerComponent(_app.name, function () {
     return _App.default;
   });
-},0,[1,2,475,484],"index.js");
+},0,[1,2,475,476],"index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -104229,20 +104229,13 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       _s = $RefreshSig$(),
       _s2 = $RefreshSig$();
 
-  var CustomInput = function CustomInput(props, ref) {
+  var CustomInput = _c2 = (0, _react.forwardRef)(_c = _s(function (props, ref) {
     _s();
 
-    var inputRef = (0, _react.useRef)();
+    var inputRef = (0, _react.useRef)(null);
     (0, _react.useImperativeHandle)(ref, function () {
       return {
-        focus: function focus() {
-          console.log('focus');
-          inputRef.current.focus();
-        },
-        clear: function clear() {
-          console.log('clear');
-          inputRef.current.clear();
-        }
+        focus: function focus() {}
       };
     });
     return _react.default.createElement(_reactNative.TextInput, {
@@ -104250,22 +104243,18 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       ref: inputRef,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 30,
-        columnNumber: 5
+        lineNumber: 23,
+        columnNumber: 11
       }
     });
-  };
-
-  _s(CustomInput, "Ag7bjDUBywlCYPNfrolbitV68Mw=", false, function () {
+  }, "Ag7bjDUBywlCYPNfrolbitV68Mw=", false, function () {
     return [_react.useImperativeHandle];
-  });
-
-  _c = CustomInput;
+  }));
 
   var App = function App() {
     _s2();
 
-    var _useState = (0, _react.useState)('React Native Hooks useRef'),
+    var _useState = (0, _react.useState)('React Native Hooks useImperativeHandle'),
         _useState2 = (0, _slicedToArray2.default)(_useState, 2),
         title = _useState2[0],
         setTitle = _useState2[1];
@@ -104274,7 +104263,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
     var focus = function focus() {
       if (inputRef.current) {
-        inputRef.current.clear();
+        inputRef.current.focus();
       }
     };
 
@@ -104283,39 +104272,29 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       barStyle: "dark-content",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52,
+        lineNumber: 43,
         columnNumber: 7
       }
     }), _react.default.createElement(_reactNative.SafeAreaView, {
       style: styles.container,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53,
+        lineNumber: 44,
         columnNumber: 7
       }
     }, _react.default.createElement(_reactNative.Text, {
       style: styles.title,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54,
+        lineNumber: 45,
         columnNumber: 9
       }
-    }, title), _react.default.createElement(_reactNative.Button, {
-      title: "Change Title",
-      onPress: function onPress() {
-        return setTitle('New Title useRef');
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 57,
-        columnNumber: 9
-      }
-    }), _react.default.createElement(CustomInput, {
+    }, title), _react.default.createElement(CustomInput, {
       style: styles.input,
       ref: inputRef,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 58,
+        lineNumber: 48,
         columnNumber: 9
       }
     }), _react.default.createElement(_reactNative.Button, {
@@ -104325,20 +104304,22 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59,
+        lineNumber: 49,
         columnNumber: 9
       }
     })));
   };
 
-  _s2(App, "2pgV7MXT6UvyfOABgEk33yG7alA=");
+  _s2(App, "e+gOSZe4bwPCfS8T/KoNGOWZXMY=");
 
-  _c2 = App;
+  _c3 = App;
 
   var styles = _reactNative.StyleSheet.create({
     title: {
       fontSize: 24,
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      marginBottom: 16,
+      textAlign: 'center'
     },
     container: {
       flex: 1,
@@ -104358,17 +104339,18 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _default = App;
   exports.default = _default;
 
-  var _c, _c2;
+  var _c, _c2, _c3;
 
-  $RefreshReg$(_c, "CustomInput");
-  $RefreshReg$(_c2, "App");
+  $RefreshReg$(_c, "CustomInput$forwardRef");
+  $RefreshReg$(_c2, "CustomInput");
+  $RefreshReg$(_c3, "App");
 },475,[1,9,14,58,2],"App.js");
 __d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {
   module.exports = {
   "name": "rn62",
   "displayName": "rn62"
 };
-},484,[],"app.json");
+},476,[],"app.json");
 __r(101);
 __r(0);
 //# sourceMappingURL=index.map

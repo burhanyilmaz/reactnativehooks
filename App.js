@@ -6,13 +6,31 @@
  * @flow strict-local
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState, useRef, useEffect, useImperativeHandle, forwardRef,
+} from 'react';
 import {
   SafeAreaView, Text, StatusBar, StyleSheet, Button, TextInput,
 } from 'react-native';
 
+const CustomInput = forwardRef((props, ref) => {
+  const inputRef = useRef(null);
+  const [value, setValue] = useState('');
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+    value: () => value,
+    characterCount: () => value.length,
+  }));
+
+  return (<TextInput style={styles.input} ref={inputRef} onChangeText={setValue} />);
+});
+
+
 const App = () => {
-  const [title, setTitle] = useState('React Native Hooks useRef');
+  const [title, setTitle] = useState('React Native Hooks useImperativeHandle');
   const inputRef = useRef(null);
 
   const focus = () => {
@@ -22,7 +40,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    focus();
+    // focus();
   }, []);
 
   return (
@@ -32,9 +50,10 @@ const App = () => {
         <Text style={styles.title}>
           {title}
         </Text>
-        <Button title="Change Title" onPress={() => setTitle('New Title useRef')} />
-        <TextInput style={styles.input} ref={inputRef} />
+        <CustomInput style={styles.input} ref={inputRef} />
         <Button title="Focus" onPress={() => focus()} />
+        <Button title="Character Count" onPress={() => alert(inputRef.current.characterCount())} />
+        <Button title="TextInput value" onPress={() => alert(inputRef.current.value())} />
       </SafeAreaView>
     </>
   );
@@ -44,6 +63,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
   },
   container: {
     flex: 1,
