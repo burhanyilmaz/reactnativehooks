@@ -6,43 +6,24 @@
  * @flow strict-local
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
-  SafeAreaView, Text, StatusBar, StyleSheet, Button,
+  SafeAreaView, Text, StatusBar, StyleSheet, Button, TextInput,
 } from 'react-native';
 
-const ComponentWillUnmount = () => {
-  useEffect(() => {
-    console.log('ComponentWillUnmount didmount gibi calisir');
-
-    return () => {
-      console.log('ComponentWillUnmount ----');
-    };
-  });
-
-  return <Text>ComponentWillUnmount</Text>;
-};
-
 const App = () => {
-  const [title, setTitle] = useState('React Native Hooks useEffect');
-  const [counter, setCounter] = useState(0);
-  const [show, setShow] = useState(true);
+  const [title, setTitle] = useState('React Native Hooks useRef');
+  const inputRef = useRef(null);
+
+  const focus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   useEffect(() => {
-    console.log('Her state gunncellendiginde', counter);
-  });
-
-  useEffect(() => {
-    console.log('componentDidMount gibi calisir.', counter);
-
-    return () => {
-      console.log('componentWillUnmount');
-    };
+    focus();
   }, []);
-
-  useEffect(() => {
-    console.log(title, counter);
-  }, [title]);
 
   return (
     <>
@@ -51,10 +32,9 @@ const App = () => {
         <Text style={styles.title}>
           {title}
         </Text>
-        <Button title="Change Title" onPress={() => setTitle('New Title')} />
-        <Button title="Increase  Counter" onPress={() => setCounter(counter + 1)} />
-        <Button title="Change Show" onPress={() => setShow(!show)} />
-        {show && <ComponentWillUnmount />}
+        <Button title="Change Title" onPress={() => setTitle('New Title useRef')} />
+        <TextInput style={styles.input} ref={inputRef} />
+        <Button title="Focus" onPress={() => focus()} />
       </SafeAreaView>
     </>
   );
@@ -69,6 +49,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 16,
+  },
+  input: {
+    backgroundColor: 'whitesmoke',
+    width: '80%',
+    borderRadius: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 12,
   },
 });
 
