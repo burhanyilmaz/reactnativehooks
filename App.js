@@ -6,19 +6,33 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView, Text, StatusBar, StyleSheet,
+  SafeAreaView, Text, StatusBar, StyleSheet, Button,
 } from 'react-native';
 
-const App = () => (
-  <>
-    <StatusBar barStyle="dark-content" />
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>React Native Hooks</Text>
-    </SafeAreaView>
-  </>
-);
+const App = () => {
+  const test = useState('test 1');
+  const [title, setTitle] = useState('React Native Hooks V1');
+  const [counter, setCounter] = useState(0);
+
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>
+          {title}
+          {' '}
+-
+          {' '}
+          {counter}
+        </Text>
+        <Button title="Change Title" onPress={() => setTitle(' New Title')} />
+        <Button title="Increase Counter" onPress={() => setCounter(counter + 1)} />
+      </SafeAreaView>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
