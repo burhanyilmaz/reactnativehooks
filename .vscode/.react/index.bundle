@@ -104226,82 +104226,105 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var _reactNative = _$$_REQUIRE(_dependencyMap[4], "react-native");
 
   var _jsxFileName = "/Users/edakik/project/rn62/App.js",
-      _s = $RefreshSig$(),
-      _s2 = $RefreshSig$();
+      _s = $RefreshSig$();
 
-  var CustomInput = _c2 = (0, _react.forwardRef)(_c = _s(function (props, ref) {
-    _s();
-
-    var inputRef = (0, _react.useRef)(null);
-    (0, _react.useImperativeHandle)(ref, function () {
-      return {
-        focus: function focus() {}
-      };
-    });
+  var CustomInput = function CustomInput(_ref) {
+    var onChangeText = _ref.onChangeText;
     return _react.default.createElement(_reactNative.TextInput, {
       style: styles.input,
-      ref: inputRef,
+      onChangeText: onChangeText,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23,
-        columnNumber: 11
+        lineNumber: 20,
+        columnNumber: 3
       }
     });
-  }, "Ag7bjDUBywlCYPNfrolbitV68Mw=", false, function () {
-    return [_react.useImperativeHandle];
-  }));
+  };
+
+  _c = CustomInput;
 
   var App = function App() {
-    _s2();
+    _s();
 
-    var _useState = (0, _react.useState)('React Native Hooks useImperativeHandle'),
+    var _useState = (0, _react.useState)('React Native Hooks useMemo'),
         _useState2 = (0, _slicedToArray2.default)(_useState, 2),
         title = _useState2[0],
         setTitle = _useState2[1];
 
-    var inputRef = (0, _react.useRef)(null);
+    var _useState3 = (0, _react.useState)(0),
+        _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
+        a = _useState4[0],
+        setA = _useState4[1];
 
-    var focus = function focus() {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    };
+    var _useState5 = (0, _react.useState)(0),
+        _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
+        b = _useState6[0],
+        setB = _useState6[1];
 
-    (0, _react.useEffect)(function () {}, []);
+    var result = (0, _react.useMemo)(function () {
+      console.log('calculate');
+      return Number(a) + Number(b);
+    });
     return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.StatusBar, {
       barStyle: "dark-content",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43,
+        lineNumber: 37,
         columnNumber: 7
       }
     }), _react.default.createElement(_reactNative.SafeAreaView, {
       style: styles.container,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44,
+        lineNumber: 38,
         columnNumber: 7
       }
     }, _react.default.createElement(_reactNative.Text, {
       style: styles.title,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45,
+        lineNumber: 39,
         columnNumber: 9
       }
-    }, title), _react.default.createElement(CustomInput, {
-      style: styles.input,
-      ref: inputRef,
+    }, title), _react.default.createElement(_reactNative.Text, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48,
+        lineNumber: 40,
         columnNumber: 9
       }
-    }), _react.default.createElement(_reactNative.Button, {
-      title: "Focus",
+    }, "a"), _react.default.createElement(CustomInput, {
+      style: styles.input,
+      onChangeText: setA,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 41,
+        columnNumber: 9
+      }
+    }), _react.default.createElement(_reactNative.Text, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42,
+        columnNumber: 9
+      }
+    }, "b"), _react.default.createElement(CustomInput, {
+      style: styles.input,
+      onChangeText: setB,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43,
+        columnNumber: 9
+      }
+    }), _react.default.createElement(_reactNative.Text, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44,
+        columnNumber: 9
+      }
+    }, "Result:", ' ', result), _react.default.createElement(_reactNative.Button, {
       onPress: function onPress() {
-        return focus();
+        return setTitle('New Title');
       },
+      title: "Change Title",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 49,
@@ -104310,9 +104333,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     })));
   };
 
-  _s2(App, "e+gOSZe4bwPCfS8T/KoNGOWZXMY=");
+  _s(App, "26HRHPZaQWbCcSWwr4bPfw6drQM=");
 
-  _c3 = App;
+  _c2 = App;
 
   var styles = _reactNative.StyleSheet.create({
     title: {
@@ -104332,18 +104355,18 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       width: '80%',
       borderRadius: 16,
       paddingHorizontal: 8,
-      paddingVertical: 12
+      paddingVertical: 12,
+      marginVertical: 8
     }
   });
 
   var _default = App;
   exports.default = _default;
 
-  var _c, _c2, _c3;
+  var _c, _c2;
 
-  $RefreshReg$(_c, "CustomInput$forwardRef");
-  $RefreshReg$(_c2, "CustomInput");
-  $RefreshReg$(_c3, "App");
+  $RefreshReg$(_c, "CustomInput");
+  $RefreshReg$(_c2, "App");
 },475,[1,9,14,58,2],"App.js");
 __d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {
   module.exports = {

@@ -6,54 +6,43 @@
  * @flow strict-local
  */
 
-import React, {
-  useState, useRef, useEffect, useImperativeHandle, forwardRef,
-} from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
-  SafeAreaView, Text, StatusBar, StyleSheet, Button, TextInput,
+  SafeAreaView,
+  Text,
+  StatusBar,
+  StyleSheet,
+  TextInput,
+  Button,
 } from 'react-native';
 
-const CustomInput = forwardRef((props, ref) => {
-  const inputRef = useRef(null);
-  const [value, setValue] = useState('');
-
-  useImperativeHandle(ref, () => ({
-    focus: () => {
-      inputRef.current.focus();
-    },
-    value: () => value,
-    characterCount: () => value.length,
-  }));
-
-  return (<TextInput style={styles.input} ref={inputRef} onChangeText={setValue} />);
-});
+const CustomInput = ({ onChangeText }) => (
+  <TextInput style={styles.input} onChangeText={onChangeText} />
+);
 
 
 const App = () => {
-  const [title, setTitle] = useState('React Native Hooks useImperativeHandle');
-  const inputRef = useRef(null);
+  const [title, setTitle] = useState('React Native Hooks useMemo');
+  const [a, setA] = useState(0);
+  const [b, setB] = useState(0);
 
-  const focus = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  useEffect(() => {
-    // focus();
-  }, []);
+  const result = useMemo(() => Number(a) + Number(b), [a, b]);
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>
-          {title}
+        <Text style={styles.title}>{title}</Text>
+        <Text>a</Text>
+        <CustomInput style={styles.input} onChangeText={setA} />
+        <Text>b</Text>
+        <CustomInput style={styles.input} onChangeText={setB} />
+        <Text>
+          Result:
+          {' '}
+          {result}
         </Text>
-        <CustomInput style={styles.input} ref={inputRef} />
-        <Button title="Focus" onPress={() => focus()} />
-        <Button title="Character Count" onPress={() => alert(inputRef.current.characterCount())} />
-        <Button title="TextInput value" onPress={() => alert(inputRef.current.value())} />
+        <Button onPress={() => setTitle('New Title')} title="Change Title" />
       </SafeAreaView>
     </>
   );
@@ -78,6 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 8,
     paddingVertical: 12,
+    marginVertical: 8,
   },
 });
 
