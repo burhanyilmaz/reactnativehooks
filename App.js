@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -22,11 +22,15 @@ const CustomInput = ({ onChangeText }) => (
 
 
 const App = () => {
-  const [title, setTitle] = useState('React Native Hooks useMemo');
+  const [title, setTitle] = useState('React Native Hooks useCallback');
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
 
-  const result = useMemo(() => Number(a) + Number(b), [a, b]);
+  const calculateCb = useCallback(() => {
+    console.log('calculateCb');
+
+    return Number(a) + Number(b);
+  }, [a, b]);
 
   return (
     <>
@@ -39,9 +43,8 @@ const App = () => {
         <CustomInput style={styles.input} onChangeText={setB} />
         <Text>
           Result:
-          {' '}
-          {result}
         </Text>
+        <Button onPress={calculateCb} title="Calculate" />
         <Button onPress={() => setTitle('New Title')} title="Change Title" />
       </SafeAreaView>
     </>
