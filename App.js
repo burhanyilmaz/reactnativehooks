@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useState, useReducer } from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -14,78 +14,69 @@ import {
   StyleSheet,
   TextInput,
   Button,
+  View,
 } from 'react-native';
 
+const themes = {
+  light: {
+    foreground: '#000000',
+    background: '#eeeeee',
+  },
+  dark: {
+    foreground: '#ffffff',
+    background: '#222222',
+  },
+};
+
+const ThemeContext = React.createContext();
+
 const CustomInput = ({ onChangeText }) => (
-  <TextInput style={styles.input} onChangeText={onChangeText} />
+  <TextInput
+    style={styles.input}
+    onChangeText={onChangeText}
+  />
 );
 
-const TYPES = {
-  ADD: 'ADD',
-  SUBTRACT: 'SUBTRACT',
-  MULTIPLY: 'MULTIPLY',
+
+const Card = () => {
+  const { state, dispatch } = useContext(ThemeContext);
+
+  return (
+    <>
+      <View style={{
+        backgroundColor: themes[state.mode].background, width: 300, height: 300, justifyContent: 'center', alignItems: 'center',
+      }}
+      >
+        <Text style={{ color: themes[state.mode].foreground }}>Card Component</Text>
+      </View>
+      <Button title="Change Theme" onPress={() => dispatch({ type: 'ChangeTheme', mode: state.mode === 'dark' ? 'light' : 'dark' })} />
+    </>
+  );
 };
-const reducer = (state, action) => {
+
+const ThemeReducer = (state, action) => {
   switch (action.type) {
-    case TYPES.ADD:
-      return { ...state, result: Number(action.a) + Number(action.b) };
-    case TYPES.SUBTRACT:
-      return { ...state, result: Number(action.a) - Number(action.b) };
-    case TYPES.MULTIPLY:
-      return { ...state, result: Number(action.a) * Number(action.b) };
+    case 'ChangeTheme':
+      return { ...state, mode: action.mode };
     default:
       return state;
   }
 };
 
 const App = () => {
-  const [title, setTitle] = useState('React Native Hooks useReducer');
-  const [a, setA] = useState(0);
-  const [b, setB] = useState(0);
-  const [{ result }, dispatch] = useReducer(reducer, { result: 0 });
+  const [title, setTitle] = useState('React Native Hooks useContext');
+  const [state, dispatch] = useReducer(ThemeReducer, { mode: 'dark' });
+
 
   return (
-    <>
+    <ThemeContext.Provider value={{ state, dispatch }}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Button onPress={() => setTitle('New Title')} title="Change Title" />
-        <CustomInput onChangeText={setA} />
-        <CustomInput onChangeText={setB} />
-        <Text>
-          Result:
-          {' '}
-          {result}
-        </Text>
-        <Button
-          onPress={() => dispatch({
-            type: TYPES.ADD,
-            a,
-            b,
-          })}
-          title="ADD"
-        />
-
-        <Button
-          onPress={() => dispatch({
-            type: TYPES.SUBTRACT,
-            a,
-            b,
-          })}
-          title="SUBTRACT"
-        />
-
-        <Button
-          onPress={() => dispatch({
-            type: TYPES.MULTIPLY,
-            a,
-            b,
-          })}
-          title="MULTIPLY"
-        />
-
+        <Card />
       </SafeAreaView>
-    </>
+    </ThemeContext.Provider>
   );
 };
 
